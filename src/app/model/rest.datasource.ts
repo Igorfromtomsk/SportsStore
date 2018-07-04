@@ -25,8 +25,9 @@ export class RestDataSource {
         return this.sendRequest(RequestMethod.Post, 'orders', order);
     }
 
-    private sendRequest(verb: RequestMethod,
-                        url: string, body?: Product | Order): Observable<Order | Product[]> {
+    private sendRequest(verb: RequestMethod, url: string, body?: Product): Observable<Product[]>;
+    private sendRequest(verb: RequestMethod, url: string, body?: Order): Observable<Order>;
+    private sendRequest(verb: RequestMethod, url: string, body?: Product | Order): Observable<Order | Product[]> {
         return this.http.request(new Request({
             method: verb,
             url: this.baseUrl + url,
